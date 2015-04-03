@@ -27,9 +27,9 @@
   },
   "homepage": "https://github.com/gre/kenburns-editor",
   "devDependencies": {
-    "babelify": "^5.0.4"
   },
   "dependencies": {
+    "babelify": "^5.0.4",
     "object-assign": "^2.0.0",
     "rect-clamp": "0.0.0",
     "rect-crop": "0.0.0",
