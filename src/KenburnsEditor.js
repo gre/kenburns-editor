@@ -61,7 +61,9 @@ const KenburnsEditor = React.createClass({
     fromColor: React.PropTypes.array,
     toColor: React.PropTypes.array,
     cornerMaxDist: React.PropTypes.number,
-    fontSize: React.PropTypes.number
+    fontSize: React.PropTypes.number,
+    overlayFill: React.PropTypes.string,
+    centerTextStyle: React.PropTypes.object
   },
 
   getDefaultProps: function () {
@@ -77,7 +79,9 @@ const KenburnsEditor = React.createClass({
       toColor: [255,200,120],
       cornerMaxDist: 0.4,
       fontSize: 12,
-      background: "#fff"
+      background: "#fff",
+      overlayFill: "rgba(0,0,0,0.5)",
+      centerTextStyle: {}
     };
   },
 
@@ -273,7 +277,9 @@ const KenburnsEditor = React.createClass({
       style,
       cornerMaxDist,
       fontSize,
-      background
+      background,
+      overlayFill,
+      centerTextStyle
     } = this.props;
     const {
       edit,
@@ -332,7 +338,8 @@ const KenburnsEditor = React.createClass({
       zoomText={value.from[0].toFixed(2)}
       cornerMaxDist={cornerMaxDist}
       color={fromColor}
-      fontSize={fontSize} />;
+      fontSize={fontSize}
+      centerTextStyle={centerTextStyle} />;
 
     const to = <KenburnsEditorRect
       name="to"
@@ -344,7 +351,8 @@ const KenburnsEditor = React.createClass({
       zoomText={value.to[0].toFixed(2)}
       cornerMaxDist={cornerMaxDist}
       color={toColor}
-      fontSize={fontSize} />;
+      fontSize={fontSize}
+      centerTextStyle={centerTextStyle} />;
 
     const before = !editFrom ? from : to;
     const after = editFrom ? from : to;
@@ -359,7 +367,10 @@ const KenburnsEditor = React.createClass({
       <img src={image} style={imgStyle} />
       <svg width={width} height={height} style={{ position: "absolute", left: 0, top: 0 }}>
         <g transform={"translate("+x+","+y+")"} width={w} height={h}>
-          <KenburnsEditorOverlay rect={rectGrow(editFrom ? fromRect : toRect, [1,1])} viewport={viewport} />
+          <KenburnsEditorOverlay
+            rect={rectGrow(editFrom ? fromRect : toRect, [1,1])}
+            viewport={viewport}
+            fill={overlayFill} />
           {progressRect}
           {before}
           {after}

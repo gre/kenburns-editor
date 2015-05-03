@@ -1,4 +1,5 @@
 import React from "react";
+import objectAssign from "object-assign";
 import {rectEquals, centerEquals} from "./core";
 
 function cornerPath (p, d) {
@@ -13,6 +14,7 @@ const KenburnsEditorRect = React.createClass({
 
   shouldComponentUpdate: function (props) {
     const {
+      centerTextStyle,
       center,
       centerText,
       edit,
@@ -25,6 +27,7 @@ const KenburnsEditorRect = React.createClass({
       fontSize
     } = this.props;
     return !(
+      centerTextStyle===props.centerTextStyle &&
       centerEquals(center, props.center) &&
       centerText===props.centerText &&
       edit===props.edit &&
@@ -40,6 +43,7 @@ const KenburnsEditorRect = React.createClass({
 
   render: function () {
     const {
+      centerTextStyle,
       center,
       centerText,
       edit,
@@ -71,12 +75,11 @@ const KenburnsEditorRect = React.createClass({
         stroke: clr,
         strokeWidth: edit ? 2 : 1
       };
-      const arrowTextStyle = {
+      const arrowTextStyle = objectAssign({
         fill: clr,
         fontSize: fontSize,
-        alignmentBaseline: "text-before-edge",
-        textShadow: "0px 0px 1px #000"
-      };
+        alignmentBaseline: "text-before-edge"
+      }, centerTextStyle);
       arrow = <g>
         <line key="a1" style={arrowStyle} x1={center[0]-size} x2={center[0]+size} y1={center[1]} y2={center[1]} />
         <line key="a2" style={arrowStyle} y1={center[1]-size} y2={center[1]+size} x1={center[0]} x2={center[0]} />

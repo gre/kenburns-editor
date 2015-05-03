@@ -2,23 +2,26 @@ import React from "react";
 import {rectEquals} from "./core";
 
 const KenburnsEditorOverlay = React.createClass({
-  shouldComponentUpdate: function (props) {
+  shouldComponentUpdate (props) {
     const {
       rect,
-      viewport
+      viewport,
+      fill
     } = this.props;
     return !(
+      fill === props.fill &&
       rectEquals(rect, props.rect) &&
       rectEquals(viewport, props.viewport)
     );
   },
-  render: function () {
+  render () {
     const {
       rect,
-      viewport
+      viewport,
+      fill
     } = this.props;
     const style = {
-      fill: "rgba(0,0,0,0.5)"
+      fill: fill
     };
     return <g>
       <rect style={style} key="1" x={0} y={0} width={Math.max(0, rect[0])} height={viewport[3]} />
