@@ -1,6 +1,6 @@
 {
   "name": "kenburns-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React component to edit a Kenburns effect",
   "main": "src/index.js",
   "peerDependencies": {
